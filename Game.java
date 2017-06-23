@@ -9,7 +9,25 @@ public class Game {
     {
         createRooms();
     }
-
+ public void play() {
+        Scanner in = new Scanner(System.in);
+        while ( true ) {
+            String line = in.nextLine();
+            String[] words = line.split(" ");
+            Handler handler = handlers.get(words[0]);
+            String value = "";
+            if (words.length > 1) {
+                value = words[1];
+            }
+            if (handler != null) {
+                handler.doCmd(value);
+            }
+            if (handler.isBye()) {
+                    break;
+            }
+        }
+        in.close();
+    }
     private void createRooms()
     {
         Room outside, lobby, pub, study, bedroom;
